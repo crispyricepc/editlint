@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       package-file-name: ${{ steps.build-package.outputs.package }}
+      package-version: ${{ steps.build-package.outputs.version }}
     steps:
       - uses: actions/checkout@v4
       - name: Setup pnpm
@@ -28,6 +29,7 @@ jobs:
         run: |
           pnpm build
           echo "package=$(pnpm pack)" >> "$GITHUB_OUTPUT"
+          echo "version=$(pnpm view editlint version)" >> "$GITHUB_OUTPUT"
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
@@ -67,3 +69,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
+          tag: ${{ needs.build.outputs.package-version }}
