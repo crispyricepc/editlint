@@ -47,6 +47,6 @@ jobs:
       - name: NPM Publish
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
-          registry: https://npm.pkg.github.com
+          registry: https://npm.pkg.github.com/crispyricepc
           token: ${{ secrets.GITHUB_TOKEN }}
           package: ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
