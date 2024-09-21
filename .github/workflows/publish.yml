@@ -48,4 +48,3 @@ jobs:
           registry: https://npm.pkg.github.com
           token: ${{ secrets.GITHUB_TOKEN }}
           package: ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
-          dry-run: true
