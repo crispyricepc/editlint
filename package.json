@@ -3,7 +3,10 @@
   "type": "module",
   "version": "0.1.0",
   "description": "editlint lets you edit your eslint rules in bulk",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "./dist/*"
+  ],
   "scripts": {
     "build": "rm ./dist/* -rf && tsc",
     "test": "vitest",
