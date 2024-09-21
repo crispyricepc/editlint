@@ -13,9 +13,6 @@
     "test:ui": "vitest --ui --watch",
     "lint": "eslint ."
   },
-  "publishConfig": {
-    "crispyricepc:registry": "https://npm.pkg.github.com"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
