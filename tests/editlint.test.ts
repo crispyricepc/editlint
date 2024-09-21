@@ -155,4 +155,15 @@ suite("Edge cases", () => {
       },
     });
   });
+
+  test("Doesn't create a rules entry on configs that don't have one", () => {
+    expect(
+      editlint(
+        {
+          name: "test",
+        },
+        () => ({ ruleName: "changed", ruleEntry: "off" })
+      )
+    ).not.toHaveProperty("rules");
+  });
 });
