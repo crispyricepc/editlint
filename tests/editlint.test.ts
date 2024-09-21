@@ -126,11 +126,33 @@ suite("Multiple configs", () => {
 suite("Edge cases", () => {
   test("Doesn't mutate undefined rule entries", () => {
     expect(
-      editlint({
-        rules: {
-          abc: undefined,
+      editlint(
+        {
+          rules: {
+            abc: undefined,
+          },
         },
-      })
+        () => ({ ruleName: "changed", ruleEntry: "off" })
+      )
     ).toMatchObject({ rules: { abc: undefined } });
+  });
+
+  test("Modifies only the rules keys, ignoring others", () => {
+    expect(
+      editlint(
+        {
+          name: "test",
+          rules: {
+            abc: "warn",
+          },
+        },
+        () => ({ ruleName: "changed", ruleEntry: "off" })
+      )
+    ).toMatchObject({
+      name: "test",
+      rules: {
+        changed: "off",
+      },
+    });
   });
 });

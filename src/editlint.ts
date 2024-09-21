@@ -24,6 +24,7 @@ export function editlint(
   });
 
   const mappedConfig = configArray.map((record) => ({
+    ...record,
     rules:
       record.rules &&
       Object.fromEntries(
