@@ -44,9 +44,26 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: npm-package
-      - run: stat ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
       - name: NPM Publish
         uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
           package: ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
+
+  create-release:
+    name: Create Release
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Package
+        id: download-package
+        uses: actions/download-artifact@v4
+        with:
+          name: npm-package
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: ${{ steps.download-package.outputs.download-path }}/${{ needs.build.outputs.package-file-name }}
