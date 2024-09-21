@@ -3,6 +3,8 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import vitest from "@vitest/eslint-plugin";
 
+import { convertToWarnings } from "./dist/index.js";
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ["**/*.{js,mjs,cjs,ts"] },
@@ -23,6 +25,6 @@ export default [
     files: ["**/*.js", "**/*.d.ts"],
     ...tseslint.configs.disableTypeChecked,
   },
-  vitest.configs.recommended,
+  convertToWarnings(vitest.configs.recommended),
   vitest.configs.env,
 ];
