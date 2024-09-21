@@ -25,7 +25,9 @@ jobs:
 
       - name: Build Package
         id: build-package
-        run: echo "package=$(pnpm pack)" >> "$GITHUB_OUTPUT"
+        run: |
+          pnpm build
+          echo "package=$(pnpm pack)" >> "$GITHUB_OUTPUT"
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
