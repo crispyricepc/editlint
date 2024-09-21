@@ -13,6 +13,7 @@ editlint lets you edit your eslint rules in bulk
 
 ```js
 import pluginJs from "@eslint/js";
+import { editlint } from "editlint";
 // ...
 
 export default [
@@ -25,6 +26,8 @@ export default [
 #### Convert only rules that start with 'no'
 
 ```js
+import { ruleEntryToWarning } from "editlint";
+
 export default [
   // ...
   editlint(pluginJs.configs.recommended, {
